@@ -189,6 +189,8 @@ func (m MovieModel) Update(movie *Movie) error {
 		movie.Version,
 	}
 
+	fmt.Println(args)
+
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 
@@ -198,6 +200,7 @@ func (m MovieModel) Update(movie *Movie) error {
 		case errors.Is(err, sql.ErrNoRows):
 			return ErrEditConflict
 		default:
+			fmt.Println("Line 203")
 			return err
 		}
 	}
